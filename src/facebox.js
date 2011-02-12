@@ -86,7 +86,7 @@
       overlay      : true,
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
-    <div id="facebox" style="display:none;"> \
+    <div id="facebox"> \
       <div class="popup"> \
         <div class="content"> \
         </div> \
@@ -174,17 +174,8 @@
     if (settings) $.extend($.facebox.settings, settings)
     $('body').append($.facebox.settings.faceboxHtml)
 
-    var preload = [ new Image(), new Image() ]
-    preload[0].src = $.facebox.settings.closeImage
-    preload[1].src = $.facebox.settings.loadingImage
-
-    $('#facebox').find('.b:first, .bl').each(function() {
-      preload.push(new Image())
-      preload.slice(-1).src = $(this).css('background-image').replace(/url\((.+)\)/, '$1')
-    })
-
-    $('#facebox .close')
-      .click($.facebox.close)
+    
+    $('#facebox .close').click($.facebox.close)
   }
 
   // getPageScroll() by quirksmode.com
@@ -219,9 +210,6 @@
   // Backwards compatibility
   function makeCompatible() {
     var $s = $.facebox.settings
-
-    $s.loadingImage = $s.loading_image || $s.loadingImage
-    $s.closeImage = $s.close_image || $s.closeImage
     $s.imageTypes = $s.image_types || $s.imageTypes
     $s.faceboxHtml = $s.facebox_html || $s.faceboxHtml
   }
